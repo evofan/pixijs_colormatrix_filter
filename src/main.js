@@ -30,8 +30,19 @@ let canvas3 = document.getElementById("canvas3");
 canvas3.appendChild(app3.view);
 app3.renderer.backgroundColor = 0x000000;
 
-let bg, bg2, bg3;
-let colorMatrixFilter, colorMatrixFilter2, colorMatrixFilter3;
+let app4 = new PIXI.Application({
+	width: WIDTH,
+	height: HEIGHT
+});
+let canvas4 = document.getElementById("canvas4");
+canvas4.appendChild(app4.view);
+app4.renderer.backgroundColor = 0x000000;
+
+let bg, bg2, bg3, bg4;
+let colorMatrixFilter,
+	colorMatrixFilter2,
+	colorMatrixFilter3,
+	colorMatrixFilter4;
 
 let elapsedTime = 0;
 
@@ -83,6 +94,11 @@ function onAssetsLoaded(loader, res) {
 	app3.stage.addChild(bg3);
 	bg3.x = 0;
 	bg3.y = 0;
+
+	bg4 = new PIXI.Sprite(res.bg_data.texture);
+	app4.stage.addChild(bg4);
+	bg4.x = 0;
+	bg4.y = 0;
 
 	// Filters //
 
@@ -145,6 +161,25 @@ function onAssetsLoaded(loader, res) {
 	app3.stage.addChild(text3);
 	text3.x = 145;
 	text3.y = 30;
+
+	//4
+	colorMatrixFilter4 = new PIXI.filters.ColorMatrixFilter();
+	colorMatrixFilter4.colorTone(0.5, 0.5, 0xffe580, 0x33cc99, false);
+	bg4.filters = [colorMatrixFilter4];
+	// Text
+	let text4 = new PIXI.Text("ColorTone", {
+		fontFamily: "Arial",
+		fontSize: 30,
+		fill: 0xffffff,
+		align: "center",
+		fontWeight: "bold",
+		dropShadow: true,
+		dropShadowColor: "#000000",
+		trim: true
+	});
+	app4.stage.addChild(text4);
+	text4.x = 120;
+	text4.y = 30;
 
 	// ticker
 	let ticker = PIXI.ticker.shared;
