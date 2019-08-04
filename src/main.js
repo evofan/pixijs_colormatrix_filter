@@ -38,11 +38,29 @@ let canvas4 = document.getElementById("canvas4");
 canvas4.appendChild(app4.view);
 app4.renderer.backgroundColor = 0x000000;
 
-let bg, bg2, bg3, bg4;
+let app5 = new PIXI.Application({
+	width: WIDTH,
+	height: HEIGHT
+});
+let canvas5 = document.getElementById("canvas5");
+canvas5.appendChild(app5.view);
+app5.renderer.backgroundColor = 0x000000;
+
+let app6 = new PIXI.Application({
+	width: WIDTH,
+	height: HEIGHT
+});
+let canvas6 = document.getElementById("canvas6");
+canvas6.appendChild(app6.view);
+app6.renderer.backgroundColor = 0x000000;
+
+let bg, bg2, bg3, bg4, bg5, bg6;
 let colorMatrixFilter,
 	colorMatrixFilter2,
 	colorMatrixFilter3,
-	colorMatrixFilter4;
+	colorMatrixFilter4,
+	colorMatrixFilter5,
+	colorMatrixFilter6;
 
 let elapsedTime = 0;
 
@@ -100,10 +118,17 @@ function onAssetsLoaded(loader, res) {
 	bg4.x = 0;
 	bg4.y = 0;
 
-	// Filters //
+	bg5 = new PIXI.Sprite(res.bg_data.texture);
+	app5.stage.addChild(bg5);
+	bg5.x = 0;
+	bg5.y = 0;
 
-	// ColorMatrixFilter
-	// https://pixijs.download/dev/docs/PIXI.filters.ColorMatrixFilter.html
+	bg6 = new PIXI.Sprite(res.bg_data.texture);
+	app6.stage.addChild(bg6);
+	bg6.x = 0;
+	bg6.y = 0;
+
+	// Filters //
 
 	// blackAndWhite
 	colorMatrixFilter = new PIXI.filters.ColorMatrixFilter();
@@ -162,12 +187,12 @@ function onAssetsLoaded(loader, res) {
 	text3.x = 145;
 	text3.y = 30;
 
-	//4
+	// colorTone
 	colorMatrixFilter4 = new PIXI.filters.ColorMatrixFilter();
 	colorMatrixFilter4.colorTone(0.5, 0.5, 0xffe580, 0x33cc99, false);
 	bg4.filters = [colorMatrixFilter4];
 	// Text
-	let text4 = new PIXI.Text("ColorTone", {
+	let text4 = new PIXI.Text("colorTone", {
 		fontFamily: "Arial",
 		fontSize: 30,
 		fill: 0xffffff,
@@ -180,6 +205,44 @@ function onAssetsLoaded(loader, res) {
 	app4.stage.addChild(text4);
 	text4.x = 120;
 	text4.y = 30;
+
+	// contrast
+	colorMatrixFilter5 = new PIXI.filters.ColorMatrixFilter();
+	colorMatrixFilter5.contrast(0.5, true);
+	bg5.filters = [colorMatrixFilter5];
+	// Text
+	let text5 = new PIXI.Text("contrast", {
+		fontFamily: "Arial",
+		fontSize: 30,
+		fill: 0xffffff,
+		align: "center",
+		fontWeight: "bold",
+		dropShadow: true,
+		dropShadowColor: "#000000",
+		trim: true
+	});
+	app5.stage.addChild(text5);
+	text5.x = 130;
+	text5.y = 30;
+
+	// desaturate
+	colorMatrixFilter6 = new PIXI.filters.ColorMatrixFilter();
+	colorMatrixFilter6.desaturate();
+	bg6.filters = [colorMatrixFilter6];
+	// Text
+	let text6 = new PIXI.Text("desaturate", {
+		fontFamily: "Arial",
+		fontSize: 30,
+		fill: 0xffffff,
+		align: "center",
+		fontWeight: "bold",
+		dropShadow: true,
+		dropShadowColor: "#000000",
+		trim: true
+	});
+	app6.stage.addChild(text6);
+	text6.x = 120;
+	text6.y = 30;
 
 	// ticker
 	let ticker = PIXI.ticker.shared;
