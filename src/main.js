@@ -21,9 +21,26 @@ let text_name = [
 	"hue",
 	"kodachrome",
 	"lsd",
-	"negative"
+	"negative",
+	"night",
+	"polaroid"
 ];
-let text_x = [135, 82, 115, 145, 120, 130, 120, 120, 170, 105, 175, 135];
+let text_x = [
+	135,
+	82,
+	115,
+	145,
+	120,
+	130,
+	120,
+	120,
+	170,
+	105,
+	175,
+	135,
+	150,
+	135
+];
 let text_y = 30;
 let filters_leng = text_x.length;
 
@@ -122,8 +139,17 @@ function onAssetsLoaded(loader, res) {
 			case 10:
 				colorMatrixFilter[i].lsd(); // [multiply]
 				break;
+
 			case 11:
 				colorMatrixFilter[i].negative(); // [multiply]
+				break;
+
+			case 12:
+				colorMatrixFilter[i].night(0.5, false); // [intensity, multiply]
+				break;
+
+			case 13:
+				colorMatrixFilter[i].polaroid(false); // [multiply]
 				break;
 
 			default:
