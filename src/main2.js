@@ -11,18 +11,18 @@ let bg = [];
 let colorMatrixFilter = [];
 let text_name = [
   "original",
-  "blackAndWhite",
-  "brightness",
-  "browni",
-  "colorTone",
-  "contrast",
-  "desaturate",
-  "greyscale",
-  "hue",
-  "kodachrome",
-  "lsd"
+  "negative",
+  "night",
+  "polaroid",
+  "predator",
+  "reset",
+  "saturate",
+  "sepia",
+  "technicolor",
+  "toBGR",
+  "vintage"
 ];
-let text_x = [135, 82, 115, 145, 120, 130, 120, 120, 170, 105, 175];
+let text_x = [135, 135, 150, 135, 135, 150, 140, 150, 120, 145, 145];
 let text_y = 30;
 let filters_leng = text_x.length;
 
@@ -83,43 +83,43 @@ function onAssetsLoaded(loader, res) {
     // apply Filter
     switch (i) {
       case 1:
-        colorMatrixFilter[i].blackAndWhite();
+        colorMatrixFilter[i].negative(); // [multiply]
         break;
 
       case 2:
-        colorMatrixFilter[i].brightness(0.5, false);
+        colorMatrixFilter[i].night(0.5, false); // [intensity, multiply]
         break;
 
       case 3:
-        colorMatrixFilter[i].browni(true);
+        colorMatrixFilter[i].polaroid(false); // [multiply]
         break;
 
       case 4:
-        colorMatrixFilter[i].colorTone(0.5, 0.5, 0xffe580, 0x33cc99, false);
+        colorMatrixFilter[i].predator(0.5, false); // [amount, multiply]
         break;
 
       case 5:
-        colorMatrixFilter[i].contrast(0.5, true);
+        colorMatrixFilter[i].reset();
         break;
 
       case 6:
-        colorMatrixFilter[i].desaturate();
+        colorMatrixFilter[i].saturate(20, false); // [amount, multiply]
         break;
 
       case 7:
-        colorMatrixFilter[i].greyscale(0.5, false); // [0: Blackish, 1: Whitening], [multiply]
+        colorMatrixFilter[i].sepia(false); // [multiply]
         break;
 
       case 8:
-        colorMatrixFilter[i].hue(180, true); // [angle(0-360)], [multiply]
+        colorMatrixFilter[i].technicolor(1); // [multiply]
         break;
 
       case 9:
-        colorMatrixFilter[i].kodachrome(10); // [multiply]
+        colorMatrixFilter[i].toBGR(); // [multiply]
         break;
 
       case 10:
-        colorMatrixFilter[i].lsd(); // [multiply]
+        colorMatrixFilter[i].vintage(1); // [multiply]
         break;
 
       default:
